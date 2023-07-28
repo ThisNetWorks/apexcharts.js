@@ -17861,7 +17861,7 @@
         var _this2 = this;
 
         // If a user is moving their mouse quickly, don't bother updating the tooltip every single frame
-        var targetDelay = 50;
+        var targetDelay = 100;
         var timeSinceLastUpdate = Date.now() - this.lastHoverTime;
 
         if (timeSinceLastUpdate >= targetDelay) {
@@ -32651,8 +32651,16 @@
           me.annotations.drawImageAnnos();
           me.annotations.drawTextAnnos();
 
-          if (w.config.grid.position === 'back' && elgrid) {
-            w.globals.dom.elGraphical.add(elgrid.el);
+          if (w.config.grid.position === 'back') {
+            var _elgrid$elGridBorders;
+
+            if (elgrid) {
+              w.globals.dom.elGraphical.add(elgrid.el);
+            }
+
+            if (elgrid !== null && elgrid !== void 0 && (_elgrid$elGridBorders = elgrid.elGridBorders) !== null && _elgrid$elGridBorders !== void 0 && _elgrid$elGridBorders.node) {
+              w.globals.dom.elGraphical.add(elgrid.elGridBorders);
+            }
           }
 
           if (Array.isArray(graphData.elGraph)) {
@@ -32663,12 +32671,16 @@
             w.globals.dom.elGraphical.add(graphData.elGraph);
           }
 
-          if (w.config.grid.position === 'front' && elgrid) {
-            w.globals.dom.elGraphical.add(elgrid.el);
-          }
+          if (w.config.grid.position === 'front') {
+            var _elgrid$elGridBorders2;
 
-          if (elgrid && elgrid.elGridBorders && elgrid.elGridBorders.node) {
-            w.globals.dom.elGraphical.add(elgrid.elGridBorders);
+            if (elgrid) {
+              w.globals.dom.elGraphical.add(elgrid.el);
+            }
+
+            if (elgrid !== null && elgrid !== void 0 && (_elgrid$elGridBorders2 = elgrid.elGridBorders) !== null && _elgrid$elGridBorders2 !== void 0 && _elgrid$elGridBorders2.node) {
+              w.globals.dom.elGraphical.add(elgrid.elGridBorders);
+            }
           }
 
           if (w.config.xaxis.crosshairs.position === 'front') {
