@@ -132,7 +132,7 @@ export default class Utils {
       capturedSeries,
       j: w.globals.isBarHorizontal ? jHorz : j,
       hoverX,
-      hoverY
+      hoverY,
     }
   }
 
@@ -155,12 +155,23 @@ export default class Utils {
     Xarrays.forEach((arrX) => {
       arrX.forEach((x, iX) => {
         const newDiff = Math.abs(hoverX - x)
-        if (newDiff < diffX) {
+        /*         console.log({
+          iX: iX,
+          x: x,
+          hoverX: hoverX,
+          newDiff: newDiff,
+          diffX: diffX,
+        }) */
+        if (newDiff <= diffX) {
           diffX = newDiff
           j = iX
         }
       })
     })
+
+    /*     if (j == -1) {
+      j = 1
+    } */
 
     if (j !== -1) {
       // find nearest graph on y-axis relevanted to nearest point on x-axis
@@ -170,16 +181,30 @@ export default class Utils {
 
       Yarrays.forEach((arrY, iAY) => {
         const newDiff = Math.abs(hoverY - arrY[j])
-        if (newDiff < diffY) {
+
+        if (newDiff <= diffY) {
           diffY = newDiff
           currIndex = iAY
         }
+
+        /*         console.log({
+          j: j,
+          currY: currY,
+          diffY: diffX,
+          newDiff: newDiff,
+          iAY: iAY,
+          currIndex: currIndex,
+        }) */
       })
     }
 
+    /*     if (currIndex == null) {
+      console.log('pass')
+    } */
+
     return {
       index: currIndex,
-      j
+      j,
     }
   }
 
@@ -202,6 +227,10 @@ export default class Utils {
       }
     }
 
+    /*     if (activeIndex == null) {
+      console.log('active Index is null')
+    } */
+
     return activeIndex
   }
 
@@ -212,14 +241,29 @@ export default class Utils {
 
     for (let i = 0; i < arr.length; i++) {
       let newdiff = Math.abs(val - arr[i])
-      if (newdiff < diff) {
+      /*       console.log({
+        i: i,
+        curr: curr,
+        val: val,
+        arr0: arr[0],
+        arrX: arr[i],
+        newdiff: newdiff,
+        diff: diff,
+      }) */
+      if (newdiff <= diff) {
         diff = newdiff
         currIndex = i
       }
     }
 
+    //console.log('currIndex ', currIndex)
+
+    /*     if (currIndex == null) {
+      console.log('currIndex is null', currIndex)
+    } */
+
     return {
-      index: currIndex
+      index: currIndex,
     }
   }
 
